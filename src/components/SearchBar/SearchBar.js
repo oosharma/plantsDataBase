@@ -19,7 +19,7 @@ class SearchBar extends Component {
 
     this.state = {
       heading: "Enter a plant name",
-      term: "Plant Name",
+      term: "",
       results: [],
       latin_name: "",
       bloom_time: "",
@@ -37,6 +37,7 @@ class SearchBar extends Component {
           value={this.state.term}
           className="input-primary"
           onChange={event => this.onInputChange(event.target.value)}
+          placeholder="Plant Name"
         />
         <Button
           variant="primary"
