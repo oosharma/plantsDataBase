@@ -1,4 +1,4 @@
-u
+{
   "name": "plant-base",
   "version": "0.1.0",
   "private": true,
@@ -20,8 +20,7 @@ u
   "scripts": {
     "dev": "react-scripts start",
     "start": "serve -s build",
-    "starting": "start",
-    "run": "start",
+    "sharma": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
