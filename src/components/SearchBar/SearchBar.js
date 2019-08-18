@@ -32,13 +32,15 @@ class SearchBar extends Component {
     return (
       <Container>
         <Display4>{this.state.heading}</Display4>
-        (example: Rose, Palm, etc.)
+        (example: Rose, Palm, etc.) &nbsp;&nbsp;
         <input
           value={this.state.term}
+          className="input-primary"
           onChange={event => this.onInputChange(event.target.value)}
         />
         <Button
           variant="primary"
+          className="btn-primary default-button"
           onClick={() => {
             this.handleButtonClick();
           }}
@@ -52,7 +54,7 @@ class SearchBar extends Component {
           <Col className="colHead">Plant Type</Col>
         </Row> */}
         <Row>
-          <Table striped bordered hover>
+          <Table className="table-primary-1" striped bordered hover>
             <thead>
               <tr>
                 <th>Name</th>
