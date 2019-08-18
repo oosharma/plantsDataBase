@@ -1,5 +1,11 @@
 import React, { Component } from "react";
-import Bootstrap, { Row, Col, Button, Container } from "bootstrap-4-react";
+import Bootstrap, {
+  Row,
+  Col,
+  Button,
+  Container,
+  Table
+} from "bootstrap-4-react";
 import { Display1, Display2, Display3, Display4 } from "bootstrap-4-react";
 import style from "./SearchBar.css";
 
@@ -26,7 +32,7 @@ class SearchBar extends Component {
     return (
       <Container>
         <Display4>{this.state.heading}</Display4>
-
+        (example: Rose, Palm, etc.)
         <input
           value={this.state.term}
           onChange={event => this.onInputChange(event.target.value)}
@@ -39,14 +45,39 @@ class SearchBar extends Component {
         >
           Search
         </Button>
-        <Row>
+        {/* <Row>
           <Col className="colHead">Name</Col>
           <Col className="colHead">Apt. Location</Col>
           <Col className="colHead">Bloom Time</Col>
           <Col className="colHead">Plant Type</Col>
+        </Row> */}
+        <Row>
+          <Table striped bordered hover>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Apt. Location</th>
+                <th>Bloom Time</th>
+                <th>Plant Type</th>
+              </tr>
+            </thead>
+            <tbody>
+              {this.state.results.map(result => {
+                return (
+                  <>
+                    <tr>
+                      <td>{result.common_name} </td>
+                      <td>{result.appropriate_location} </td>
+                      <td>{result.bloom_time} </td>
+                      <td>{result.plant_type} </td>
+                    </tr>
+                  </>
+                );
+              })}
+            </tbody>
+          </Table>
         </Row>
-
-        {this.state.results.map(result => {
+        {/* {this.state.results.map(result => {
           return (
             <>
               <Row>
@@ -57,7 +88,7 @@ class SearchBar extends Component {
               </Row>
             </>
           );
-        })}
+        })} */}
       </Container>
     );
   }
