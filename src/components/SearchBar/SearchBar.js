@@ -25,7 +25,8 @@ class SearchBar extends Component {
       plant_type: "",
       appropriate_location: "",
       classN: "hideButton",
-      classTable: "hideButton"
+      classTable: "hideButton",
+      searchButtonTerm: "Search"
     };
   }
 
@@ -54,10 +55,12 @@ class SearchBar extends Component {
             console.log("hello");
           }}
           onClick={() => {
+            this.setState({ searchButtonTerm: "Loading..." });
+
             this.handleButtonClick();
           }}
         >
-          Search
+          {this.state.searchButtonTerm}
         </Button>
         <Button
           variant="primary"
@@ -136,6 +139,7 @@ class SearchBar extends Component {
             if (response.length) {
               this.showClear();
               this.setState({ classTable: "showButton" });
+              this.setState({ searchButtonTerm: "Search" });
             }
           }
         });
