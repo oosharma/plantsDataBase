@@ -4,7 +4,8 @@ import Bootstrap, {
   Col,
   Button,
   Container,
-  Table
+  Table,
+  Form
 } from "bootstrap-4-react";
 import { Display1, Display2, Display3, Display4 } from "bootstrap-4-react";
 import style from "./SearchBar.css";
@@ -17,7 +18,7 @@ class SearchBar extends Component {
     this.state = {
       heading: "Enter a plant name",
       term: "",
-
+      placeholder: "Ex: Rose, Palm, California, etc.",
       results: [],
       latin_name: "",
       bloom_time: "",
@@ -31,16 +32,26 @@ class SearchBar extends Component {
     return (
       <Container>
         <Display4>{this.state.heading}</Display4>
-        (example: Rose, Palm, California, etc.) &nbsp;&nbsp;
+
         <input
           value={this.state.term}
           className="input-primary"
           onChange={event => this.onInputChange(event.target.value)}
-          placeholder="Plant Name"
+          placeholder={this.state.placeholder}
+          onSubmit={() => {
+            this.handleButtonClick();
+            console.log("hello");
+          }}
         />
+        <br></br>
         <Button
           variant="primary"
           className="btn-primary default-button"
+          type="button"
+          onSubmit={() => {
+            this.handleButtonClick();
+            console.log("hello");
+          }}
           onClick={() => {
             this.handleButtonClick();
           }}
@@ -62,32 +73,32 @@ class SearchBar extends Component {
           <Col className="colHead">Bloom Time</Col>
           <Col className="colHead">Plant Type</Col>
         </Row> */}
-        <Row>
-          <Table className="table-primary-1" striped bordered hover>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Apt. Location</th>
-                <th>Bloom Time</th>
-                <th>Plant Type</th>
-              </tr>
-            </thead>
-            <tbody>
-              {this.state.results.map(result => {
-                return (
-                  <>
-                    <tr>
-                      <td>{result.common_name} </td>
-                      <td>{result.appropriate_location} </td>
-                      <td>{result.bloom_time} </td>
-                      <td>{result.plant_type} </td>
-                    </tr>
-                  </>
-                );
-              })}
-            </tbody>
-          </Table>
-        </Row>
+
+        <Table className="table-primary-1" striped bordered hover>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Apt. Location</th>
+              <th>Bloom Time</th>
+              <th>Plant Type</th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.state.results.map(result => {
+              return (
+                <>
+                  <tr>
+                    <td>{result.common_name} </td>
+                    <td>{result.appropriate_location} </td>
+                    <td>{result.bloom_time} </td>
+                    <td>{result.plant_type} </td>
+                  </tr>
+                </>
+              );
+            })}
+          </tbody>
+        </Table>
+
         {/* {this.state.results.map(result => {
           return (
             <>
@@ -108,22 +119,27 @@ class SearchBar extends Component {
     const query = this.queryGenerator(this.state.term);
 
     //fetch response from OMDB and update state
-
-    fetch(query)
-      .then(response => response.json())
-      .then(response => {
-        for (let i = 0; i < response.length; i++) {
-          this.setState({
-            results: [response[i], ...this.state.results]
-          });
-          if (response.length) {
-            this.showClear();
+    if (this.state.term) {
+      fetch(query)
+        .then(response => response.json())
+        .then(response => {
+          for (let i = 0; i < response.length; i++) {
+            this.setState({
+              results: [response[i], ...this.state.results]
+            });
+            if (response.length) {
+              this.showClear();
+            }
           }
-        }
-      });
-    this.setState({ heading: "Enter another plant name" });
-    this.forceUpdate();
-    this.setState({ term: "" });
+        });
+      this.setState({ heading: "Enter another plant name" });
+      this.forceUpdate();
+      const term = this.state.term;
+      this.setState({ term: "" });
+      this.setState({ placeholder: "Ex: Rose, Palm, California, etc." });
+    } else {
+      window.alert("Please enter a search term");
+    }
   };
 
   addLower = term => {
