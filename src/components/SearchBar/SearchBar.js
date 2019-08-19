@@ -31,7 +31,7 @@ class SearchBar extends Component {
     return (
       <Container>
         <Display4>{this.state.heading}</Display4>
-        (example: Rose, Palm, etc.) &nbsp;&nbsp;
+        (example: Rose, Palm, California, etc.) &nbsp;&nbsp;
         <input
           value={this.state.term}
           className="input-primary"
