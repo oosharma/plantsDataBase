@@ -28,3 +28,8 @@ input.input-primary {
 button.btn.btn-primary.default-button {
   margin: 0px 10px 0px 0px;
 }
+@media only screen and (max-width: 448px) {
+  th.head-1 {
+    padding-bottom: 36px;
+  }
+}

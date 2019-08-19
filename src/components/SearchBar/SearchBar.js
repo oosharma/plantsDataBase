@@ -77,7 +77,7 @@ class SearchBar extends Component {
         <Table className="table-primary-1" striped bordered hover>
           <thead>
             <tr>
-              <th>Name</th>
+              <th className="head-1">Name</th>
               <th>Apt. Location</th>
               <th>Bloom Time</th>
               <th>Plant Type</th>
