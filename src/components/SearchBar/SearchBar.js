@@ -24,7 +24,8 @@ class SearchBar extends Component {
       bloom_time: "",
       plant_type: "",
       appropriate_location: "",
-      classN: "hideButton"
+      classN: "hideButton",
+      classTable: "hideButton"
     };
   }
 
@@ -74,7 +75,12 @@ class SearchBar extends Component {
           <Col className="colHead">Plant Type</Col>
         </Row> */}
 
-        <Table className="table-primary-1" striped bordered hover>
+        <Table
+          className={`table-primary-1 ${this.state.classTable}`}
+          striped
+          bordered
+          hover
+        >
           <thead>
             <tr>
               <th className="head-1">Name</th>
@@ -137,6 +143,7 @@ class SearchBar extends Component {
       const term = this.state.term;
       this.setState({ term: "" });
       this.setState({ placeholder: "Ex: Rose, Palm, California, etc." });
+      this.setState({ classTable: "showButton" });
     } else {
       window.alert("Please enter a search term");
     }
