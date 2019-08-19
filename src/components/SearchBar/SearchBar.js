@@ -135,6 +135,7 @@ class SearchBar extends Component {
             });
             if (response.length) {
               this.showClear();
+              this.setState({ classTable: "showButton" });
             }
           }
         });
@@ -143,7 +144,6 @@ class SearchBar extends Component {
       const term = this.state.term;
       this.setState({ term: "" });
       this.setState({ placeholder: "Ex: Rose, Palm, California, etc." });
-      this.setState({ classTable: "showButton" });
     } else {
       window.alert("Please enter a search term");
     }
