@@ -30,6 +30,6 @@ button.btn.btn-primary.default-button {
 }
 @media only screen and (max-width: 448px) {
   th.head-1 {
-    padding-bottom: 36px;
+    padding-bottom: 36px !important;
   }
 }
