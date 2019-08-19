@@ -114,7 +114,7 @@ class SearchBar extends Component {
       .then(response => {
         for (let i = 0; i < response.length; i++) {
           this.setState({
-            results: [...this.state.results, response[i]]
+            results: [response[i], ...this.state.results]
           });
           if (response.length) {
             this.showClear();
@@ -123,6 +123,7 @@ class SearchBar extends Component {
       });
     this.setState({ heading: "Enter another plant name" });
     this.forceUpdate();
+    this.setState({ term: "" });
   };
 
   addLower = term => {
