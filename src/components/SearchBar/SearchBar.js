@@ -8,10 +8,7 @@ import Bootstrap, {
 } from "bootstrap-4-react";
 import { Display1, Display2, Display3, Display4 } from "bootstrap-4-react";
 import style from "./SearchBar.css";
-
 import { List } from "bootstrap-4-react";
-
-// import style from "./SearchBar.css";
 
 class SearchBar extends Component {
   constructor(props) {
