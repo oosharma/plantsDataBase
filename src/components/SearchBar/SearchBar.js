@@ -161,6 +161,7 @@ class SearchBar extends Component {
       results: [],
       classN: "hideButton"
     });
+    this.setState({ classTable: "hideButton" });
   };
 
   showClear = () => {
