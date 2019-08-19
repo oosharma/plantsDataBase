@@ -17,11 +17,13 @@ class SearchBar extends Component {
     this.state = {
       heading: "Enter a plant name",
       term: "",
+
       results: [],
       latin_name: "",
       bloom_time: "",
       plant_type: "",
-      appropriate_location: ""
+      appropriate_location: "",
+      classN: "hideButton"
     };
   }
 
@@ -44,6 +46,15 @@ class SearchBar extends Component {
           }}
         >
           Search
+        </Button>
+        <Button
+          variant="primary"
+          className={`btn-primary default-button ${this.state.classN}`}
+          onClick={() => {
+            this.handleClearButtonClick();
+          }}
+        >
+          Clear Results
         </Button>
         {/* <Row>
           <Col className="colHead">Name</Col>
@@ -98,53 +109,38 @@ class SearchBar extends Component {
 
     //fetch response from OMDB and update state
 
-    console.log("hello");
     fetch(query)
       .then(response => response.json())
       .then(response => {
         for (let i = 0; i < response.length; i++) {
           this.setState({
-            // latin_name: [
-            //   ...this.state.latin_name,
-            //   {
-            //     latin_name: response[i].latin_name
-            //     // plant_type: response[i].plant_type,
-            //     // appropriate_location: response[i].appropriate_location,
-            //     // bloom_time: response[i].bloom_time
-            //   }
-            // ],
-            // bloom_time: [
-            //   ...this.state.bloom_time,
-            //   {
-            //     bloom_time: response[i].bloom_time
-            //     // plant_type: response[i].plant_type,
-            //     // appropriate_location: response[i].appropriate_location,
-            //     // bloom_time: response[i].bloom_time
-            //   }
-            // ],
-            // plant_type: [
-            //   ...this.state.plant_type,
-            //   {
-            //     plant_type: response[i].plant_type
-            //     // plant_type: response[i].plant_type,
-            //     // appropriate_location: response[i].appropriate_location,
-            //     // bloom_time: response[i].bloom_time
-            //   }
-            // ],
-            // appropriate_location: [
-            //   ...this.state.appropriate_location,
-            //   {
-            //     appropriate_location: response[i].appropriate_location
-            //     // plant_type: response[i].plant_type,
-            //     // appropriate_location: response[i].appropriate_location,
-            //     // bloom_time: response[i].bloom_time
-            //   }
-            // ],
             results: [...this.state.results, response[i]]
           });
+          if (response.length) {
+            this.showClear();
+          }
         }
       });
     this.setState({ heading: "Enter another plant name" });
+    this.forceUpdate();
+  };
+
+  addLower = term => {
+    return term.charAt(0).toLowerCase() + this.state.term.slice(1);
+  };
+  addUpper = term => {
+    return term.charAt(0).toUpperCase() + this.state.term.slice(1);
+  };
+
+  handleClearButtonClick = () => {
+    this.setState({
+      results: [],
+      classN: "hideButton"
+    });
+  };
+
+  showClear = () => {
+    this.setState({ classN: "showButton" });
   };
 
   onInputChange(term) {
@@ -154,12 +150,19 @@ class SearchBar extends Component {
   queryGenerator = () => {
     //Get value from search box
     //Curate query
-
-    const query = `https://data.sfgov.org/resource/vmnk-skih.json?$where=common_name like '%25${this.state.term}%25'`;
+    var term2 = "";
+    if (this.state.term.charAt(0) === this.state.term.charAt(0).toUpperCase()) {
+      term2 = this.addLower(this.state.term);
+    } else {
+      term2 = this.addUpper(this.state.term);
+    }
+    const query = `https://data.sfgov.org/resource/vmnk-skih.json?$where=common_name%20like%20%27%25${this.state.term}%25%27%20OR%20common_name%20like%20%27%25${term2}%25%27`;
+    // const query = `https://data.sfgov.org/resource/vmnk-skih.json?$where=common_name like '%25${this.state.term}%25' || common_name like '%25${term2}%25' `;
     // https://data.cityofchicago.org/resource/tt4n-kn4t.json?$where=job_titles like '%25CHIEF%25'
     //soda.demo.socrata.com/resource/4tka-6guv.json?$where=magnitude > 3.0
     // https: // const query =
     // "https://soda.demo.socrata.com/resource/4tka-6guv.json?$where=latin_name like aloe";
+    console.log({ query });
 
     return query;
   };

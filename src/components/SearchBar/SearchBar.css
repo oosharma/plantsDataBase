@@ -14,3 +14,7 @@
 .default-button {
   margin: 0px 0px 8px 10px;
 }
+
+.hideButton {
+  display: none;
+}
