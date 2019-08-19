@@ -16,7 +16,7 @@ class SearchBar extends Component {
     super(props);
 
     this.state = {
-      heading: "Enter a plant name",
+      heading: "Search a Plant",
       term: "",
       placeholder: "Ex: Rose, Palm, California, etc.",
       results: [],
