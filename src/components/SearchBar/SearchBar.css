@@ -16,7 +16,8 @@
 }
 
 .hideButton {
-  display: none;
+  display: none !important;
+  font-size: 30px;
 }
 
 input.input-primary {
