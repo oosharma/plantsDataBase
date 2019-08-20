@@ -28,3 +28,7 @@ input.input-primary {
 button.btn.btn-primary.default-button {
   margin: 0px 10px 0px 0px;
 }
+
+.selectClass {
+  width: 300px;
+}
