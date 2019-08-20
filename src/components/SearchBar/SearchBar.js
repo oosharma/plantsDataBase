@@ -2904,15 +2904,13 @@ class SearchBar extends Component {
             console.log("hello");
           }}
           onClick={() => {
-            this.setState({ searchButtonTerm: "Loading..." });
-
             this.handleButtonClick();
           }}
         >
           {this.state.searchButtonTerm}
         </Button>
 
-        <Button
+        {/* <Button
           variant="primary"
           className="btn-primary default-button"
           type="button"
@@ -2929,7 +2927,7 @@ class SearchBar extends Component {
           }}
         >
           {this.state.advancedFilterTerm}
-        </Button>
+        </Button> */}
 
         <Button
           variant="primary"
@@ -2998,6 +2996,8 @@ class SearchBar extends Component {
 
     //fetch response from OMDB and update state
     if (this.state.term) {
+      this.setState({ searchButtonTerm: "Loading..." });
+
       fetch(query)
         .then(response => response.json())
         .then(response => {
