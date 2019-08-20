@@ -26,7 +26,8 @@ class SearchBar extends Component {
       appropriate_location: "",
       classN: "hideButton",
       classTable: "hideButton",
-      searchButtonTerm: "Search"
+      searchButtonTerm: "Search",
+      advancedFilterTerm: "More Filters"
     };
   }
 
@@ -62,6 +63,26 @@ class SearchBar extends Component {
         >
           {this.state.searchButtonTerm}
         </Button>
+
+        <Button
+          variant="primary"
+          className="btn-primary default-button"
+          type="button"
+          onSubmit={() => {
+            this.handleAdvancedFilterClick();
+            console.log("hello");
+          }}
+          onClick={() => {
+            if (this.state.advancedFilterTerm === "More Filters")
+              this.setState({ advancedFilterTerm: "Hide Filters" });
+            else this.setState({ advancedFilterTerm: "More Filters" });
+
+            this.handleAdvancedFilterClick();
+          }}
+        >
+          {this.state.advancedFilterTerm}
+        </Button>
+
         <Button
           variant="primary"
           className={`btn-primary default-button ${this.state.classN}`}
@@ -194,6 +215,14 @@ class SearchBar extends Component {
     console.log({ query });
 
     return query;
+  };
+
+  handleAdvancedFilterClick = () => {
+    if (this.state.filterShow) {
+      this.setState({ filterClass: "hideButton" });
+    } else {
+      this.setState({ filterClass: "showButton" });
+    }
   };
 
   searchQuery(term) {}
