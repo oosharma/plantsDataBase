@@ -6,7 +6,10 @@ const Schema = mongoose.Schema;
 const DataSchema = new Schema(
   {
     id: Number,
-    message: String
+    message: String,
+    bloom_time: String,
+    plant_type: String,
+    appropriate_location: String
   },
   { timestamps: true }
 );

@@ -2964,7 +2964,7 @@ class SearchBar extends Component {
                     <td>{result.plant_type} </td>
                     <td
                       onClick={() => {
-                        this.handleAdd(result.common_name);
+                        this.handleAdd(result);
                       }}
                     >
                       Add
@@ -2992,8 +2992,8 @@ class SearchBar extends Component {
     );
   }
 
-  handleAdd = name => {
-    this.props.changeAddItem(name);
+  handleAdd = result => {
+    this.props.changeAddItem(result);
   };
 
   handleButtonClick = () => {

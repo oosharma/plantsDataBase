@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import SearchBar from "./components/SearchBar/SearchBar";
 import axios from "axios";
-import { Table } from "bootstrap-4-react";
+import { Table, Container } from "bootstrap-4-react";
 
 class App extends Component {
   // initialize our state
@@ -9,20 +9,29 @@ class App extends Component {
     data: [],
     id: 0,
     message: null,
+    bloom_time: null,
+    plant_type: null,
+    appropriate_location: null,
     intervalIsSet: false,
     idToDelete: null,
     idToUpdate: null,
     objectToUpdate: null,
-    addItem: ""
+    addName: "",
+    addBloom_time: "",
+    addPlant_type: "",
+    addAppropriate_location: ""
   };
   addToDB = () => {
-    console.log(this.state.addItem);
-    this.putDataToDB(this.state.addItem);
+    console.log(this.state.addName);
+    this.putDataToDB(this.state.addName);
   };
-  changeAddItem = newValue => {
+  changeAddItem = result => {
     this.setState(
       {
-        addItem: newValue
+        addName: result.common_name,
+        addBloom_time: result.bloom_time,
+        addPlant_type: result.plant_type,
+        addAppropriate_location: result.appropriate_location
       },
       () => {
         console.log("setState completed", this.state);
@@ -74,7 +83,10 @@ class App extends Component {
 
     axios.post("http://localhost:3001/api/putData", {
       id: idToBeAdded,
-      message: message
+      message: message,
+      bloom_time: this.state.addBloom_time,
+      plant_type: this.state.addPlant_type,
+      appropriate_location: this.state.addAppropriate_location
     });
   };
 
@@ -121,42 +133,47 @@ class App extends Component {
     return (
       <>
         <SearchBar
-          addItem={this.state.first}
           changeAddItem={this.changeAddItem.bind(this)}
           addToDB={this.addToDB.bind(this)}
         />
-        <Table className striped bordered hover>
-          <thead>
-            <tr>
-              <th className="head-1">Name</th>
-              <th>id</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.length <= 0
-              ? "NO DB ENTRIES YET"
-              : data.map(dat => {
-                  return (
-                    <>
-                      <tr key={data.message}>
-                        <td>{dat.message}</td>
-                        <td>{dat.id} </td>
-                        <td
-                          onClick={() =>
-                            this.setState({ idToDelete: dat.id }, () =>
-                              this.deleteFromDB(this.state.idToDelete)
-                            )
-                          }
-                        >
-                          Delete
-                        </td>
-                      </tr>
-                    </>
-                  );
-                })}
-          </tbody>
-        </Table>
+        <Container>
+          <Table className striped bordered hover>
+            <thead>
+              <tr>
+                <th className="head-1">Name</th>
+                <th>Bloom Time</th>
+                <th>Plant Type</th>
+                <th>Appropriate Location</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data.length <= 0
+                ? "NO DB ENTRIES YET"
+                : data.map(dat => {
+                    return (
+                      <>
+                        <tr key={data.message}>
+                          <td>{dat.message}</td>
+                          <td>{dat.bloom_time} </td>
+                          <td>{dat.plant_type} </td>
+                          <td>{dat.appropriate_location} </td>
+
+                          <td
+                            onClick={() =>
+                              this.setState({ idToDelete: dat.id }, () =>
+                                this.deleteFromDB(this.state.idToDelete)
+                              )
+                            }
+                          >
+                            Delete
+                          </td>
+                        </tr>
+                      </>
+                    );
+                  })}
+            </tbody>
+          </Table>
+        </Container>
 
         {/* <div>
           <ul>
