@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import SearchBar from "./components/SearchBar/SearchBar";
 import axios from "axios";
+import { Table } from "bootstrap-4-react";
 
 class App extends Component {
   // initialize our state
@@ -11,9 +12,24 @@ class App extends Component {
     intervalIsSet: false,
     idToDelete: null,
     idToUpdate: null,
-    objectToUpdate: null
+    objectToUpdate: null,
+    addItem: ""
   };
-
+  addToDB = () => {
+    console.log(this.state.addItem);
+    this.putDataToDB(this.state.addItem);
+  };
+  changeAddItem = newValue => {
+    this.setState(
+      {
+        addItem: newValue
+      },
+      () => {
+        console.log("setState completed", this.state);
+        this.addToDB();
+      }
+    );
+  };
   // when component mounts, first thing it does is fetch all existing data in our db
   // then we incorporate a polling logic so that we can easily see if our db has
   // changed and implement those changes into our UI
@@ -104,9 +120,45 @@ class App extends Component {
     const { data } = this.state;
     return (
       <>
-        <SearchBar />
+        <SearchBar
+          addItem={this.state.first}
+          changeAddItem={this.changeAddItem.bind(this)}
+          addToDB={this.addToDB.bind(this)}
+        />
+        <Table className striped bordered hover>
+          <thead>
+            <tr>
+              <th className="head-1">Name</th>
+              <th>id</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.length <= 0
+              ? "NO DB ENTRIES YET"
+              : data.map(dat => {
+                  return (
+                    <>
+                      <tr key={data.message}>
+                        <td>{dat.message}</td>
+                        <td>{dat.id} </td>
+                        <td
+                          onClick={() =>
+                            this.setState({ idToDelete: dat.id }, () =>
+                              this.deleteFromDB(this.state.idToDelete)
+                            )
+                          }
+                        >
+                          Delete
+                        </td>
+                      </tr>
+                    </>
+                  );
+                })}
+          </tbody>
+        </Table>
 
-        <div>
+        {/* <div>
           <ul>
             {data.length <= 0
               ? "NO DB ENTRIES YET"
@@ -128,7 +180,7 @@ class App extends Component {
             <button onClick={() => this.putDataToDB(this.state.message)}>
               ADD
             </button>
-          </div>
+          </div> 
           <div style={{ padding: "10px" }}>
             <input
               type="text"
@@ -161,7 +213,7 @@ class App extends Component {
               UPDATE
             </button>
           </div>
-        </div>
+        </div> */}
       </>
     );
   }

@@ -2859,11 +2859,10 @@ class SearchBar extends Component {
       selectedOption: null
     };
   }
+
   handleSelectChange = selectedOption => {
     this.setState({ selectedOption });
     this.setState({ term: selectedOption.label });
-
-    console.log(`Option selected:`, selectedOption);
   };
 
   render() {
@@ -2897,7 +2896,6 @@ class SearchBar extends Component {
           type="button"
           onSubmit={() => {
             this.handleButtonClick();
-            console.log("hello");
           }}
           onClick={() => {
             this.handleButtonClick();
@@ -2995,7 +2993,7 @@ class SearchBar extends Component {
   }
 
   handleAdd = name => {
-    console.log(name);
+    this.props.changeAddItem(name);
   };
 
   handleButtonClick = () => {
@@ -3067,7 +3065,6 @@ class SearchBar extends Component {
     //soda.demo.socrata.com/resource/4tka-6guv.json?$where=magnitude > 3.0
     // https: // const query =
     // "https://soda.demo.socrata.com/resource/4tka-6guv.json?$where=latin_name like aloe";
-    console.log({ query });
 
     return query;
   };
