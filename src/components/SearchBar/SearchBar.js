@@ -16,10 +16,6 @@ import Autosuggest from "react-autosuggest";
 
 const options = [
   {
-    value: "Angel's Hair",
-    label: "Angel's Hair"
-  },
-  {
     value: "Accolade Elm",
     label: "Accolade Elm"
   },
@@ -2968,6 +2964,13 @@ class SearchBar extends Component {
                     <td>{result.appropriate_location} </td>
                     <td>{result.bloom_time} </td>
                     <td>{result.plant_type} </td>
+                    <td
+                      onClick={() => {
+                        this.handleAdd(result.common_name);
+                      }}
+                    >
+                      Add
+                    </td>
                   </tr>
                 </>
               );
@@ -2990,6 +2993,10 @@ class SearchBar extends Component {
       </Container>
     );
   }
+
+  handleAdd = name => {
+    console.log(name);
+  };
 
   handleButtonClick = () => {
     const query = this.queryGenerator(this.state.term);
