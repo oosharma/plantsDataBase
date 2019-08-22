@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import SearchBar from "./components/SearchBar/SearchBar";
 import axios from "axios";
-import { Table, Container } from "bootstrap-4-react";
+import { Table, Container, Display4, Row } from "bootstrap-4-react";
 
 class App extends Component {
   // initialize our state
@@ -19,7 +19,9 @@ class App extends Component {
     addName: "",
     addBloom_time: "",
     addPlant_type: "",
-    addAppropriate_location: ""
+    addAppropriate_location: "",
+    emptyDB: 0,
+    showPinned: true
   };
   addToDB = () => {
     console.log(this.state.addName);
@@ -124,115 +126,97 @@ class App extends Component {
       update: { message: updateToApply }
     });
   };
+  handleEmptyDb = () => {
+    // this.setState({
+    //   emptyDB: true
+    // });
+    // this.setState({ emptyDB: 1 });
+    return "Empty... please create a search and pin your favorite plants";
+  };
+  checkDbEmpty = () => {
+    console.log("here");
+    if (this.state.data.length <= 0) {
+      this.setState({ showPinned: false });
+      console.log("there");
+    } else {
+      this.setState({ showPinned: true });
+      console.log("whrer");
+    }
+  };
 
   // here is our UI
   // it is easy to understand their functions when you
   // see them render into our screen
   render() {
     const { data } = this.state;
-    return (
-      <>
-        <SearchBar
-          changeAddItem={this.changeAddItem.bind(this)}
-          addToDB={this.addToDB.bind(this)}
-        />
-        <Container>
-          <Table className striped bordered hover>
-            <thead>
-              <tr>
-                <th className="head-1">Name</th>
-                <th>Bloom Time</th>
-                <th>Plant Type</th>
-                <th>Appropriate Location</th>
-              </tr>
-            </thead>
-            <tbody>
-              {data.length <= 0
-                ? "NO DB ENTRIES YET"
-                : data.map(dat => {
-                    return (
-                      <>
-                        <tr key={data.message}>
-                          <td>{dat.message}</td>
-                          <td>{dat.bloom_time} </td>
-                          <td>{dat.plant_type} </td>
-                          <td>{dat.appropriate_location} </td>
 
-                          <td
-                            onClick={() =>
-                              this.setState({ idToDelete: dat.id }, () =>
-                                this.deleteFromDB(this.state.idToDelete)
-                              )
-                            }
-                          >
-                            Delete
-                          </td>
-                        </tr>
-                      </>
-                    );
-                  })}
-            </tbody>
-          </Table>
-        </Container>
+    if (this.state.data.length) {
+      return (
+        <>
+          <SearchBar
+            changeAddItem={this.changeAddItem.bind(this)}
+            addToDB={this.addToDB.bind(this)}
+          />
 
-        {/* <div>
-          <ul>
-            {data.length <= 0
-              ? "NO DB ENTRIES YET"
-              : data.map(dat => (
-                  <li style={{ padding: "10px" }} key={data.message}>
-                    <span style={{ color: "gray" }}> id: </span> {dat.id} <br />
-                    <span style={{ color: "gray" }}> data: </span>
-                    {dat.message}
-                  </li>
-                ))}
-          </ul>
-          <div style={{ padding: "10px" }}>
-            <input
-              type="text"
-              onChange={e => this.setState({ message: e.target.value })}
-              placeholder="add something in the database"
-              style={{ width: "200px" }}
-            />
-            <button onClick={() => this.putDataToDB(this.state.message)}>
-              ADD
-            </button>
-          </div> 
-          <div style={{ padding: "10px" }}>
-            <input
-              type="text"
-              style={{ width: "200px" }}
-              onChange={e => this.setState({ idToDelete: e.target.value })}
-              placeholder="put id of item to delete here"
-            />
-            <button onClick={() => this.deleteFromDB(this.state.idToDelete)}>
-              DELETE
-            </button>
-          </div>
-          <div style={{ padding: "10px" }}>
-            <input
-              type="text"
-              style={{ width: "200px" }}
-              onChange={e => this.setState({ idToUpdate: e.target.value })}
-              placeholder="id of item to update here"
-            />
-            <input
-              type="text"
-              style={{ width: "200px" }}
-              onChange={e => this.setState({ updateToApply: e.target.value })}
-              placeholder="put new value of the item here"
-            />
-            <button
-              onClick={() =>
-                this.updateDB(this.state.idToUpdate, this.state.updateToApply)
-              }
-            >
-              UPDATE
-            </button>
-          </div>
-        </div> */}
-      </>
-    );
+          <Container className="mt-5">
+            <Row>
+              <Display4>Pinned Results</Display4>
+            </Row>
+            <Table className striped bordered hover>
+              <thead>
+                <tr>
+                  <th className="head-1">Name</th>
+                  <th>Bloom Time</th>
+                  <th>Plant Type</th>
+                  <th>Appropriate Location</th>
+                </tr>
+              </thead>
+              <tbody>
+                {data.length <= 0
+                  ? this.handleEmptyDb()
+                  : data.map(dat => {
+                      return (
+                        <>
+                          <tr key={data.message}>
+                            <td>{dat.message}</td>
+                            <td>{dat.bloom_time} </td>
+                            <td>{dat.plant_type} </td>
+                            <td>{dat.appropriate_location} </td>
+
+                            <td
+                              onClick={() =>
+                                this.setState({ idToDelete: dat.id }, () =>
+                                  this.deleteFromDB(this.state.idToDelete)
+                                )
+                              }
+                            >
+                              Delete
+                            </td>
+                          </tr>
+                        </>
+                      );
+                    })}
+              </tbody>
+            </Table>
+          </Container>
+        </>
+      );
+    } else {
+      return (
+        <>
+          <SearchBar
+            changeAddItem={this.changeAddItem.bind(this)}
+            addToDB={this.addToDB.bind(this)}
+          />
+
+          <Container className="mt-5">
+            <Row>
+              <Display4>Use Search to Find Plants and Pin them here</Display4>
+            </Row>
+          </Container>
+        </>
+      );
+    }
   }
 }
 

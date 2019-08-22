@@ -2875,7 +2875,7 @@ class SearchBar extends Component {
     };
     return (
       <Container>
-        <Row>
+        <Row className="pt-5">
           <Display4>{this.state.heading}</Display4>
         </Row>
         <Row>
