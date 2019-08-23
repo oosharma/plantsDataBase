@@ -1,0 +1,74 @@
+{
+  "name": "plant-base",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "npm": "6.9.0",
+    "node": "10.16.2"
+  },
+  "dependencies": {
+    "@material-ui/core": "^4.3.2",
+    "@material-ui/icons": "^4.2.1",
+    "axios": "^0.19.0",
+    "body-parser": "^1.19.0",
+    "bootstrap-4-react": "0.0.59",
+    "concurrently": "^4.1.2",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "moesif-express": "^2.9.9",
+    "mongoose": "^5.6.9",
+    "morgan": "^1.9.1",
+    "react": "^16.9.0",
+    "react-autosuggest": "^9.4.3",
+    "react-autowhatever": "^10.2.0",
+    "react-dom": "^16.9.0",
+    "react-scripts": "3.1.0",
+    "react-select": "^3.0.4",
+    "serve": "^11.1.0"
+  },
+  "scripts": {
+    "dev": "react-scripts start",
+    "start": "serve -s build",
+    "sharma": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "heroku-postbuild": "npm run build",
+    "full-stack": "concurrently \"cd .. && node server.js\" \"cd ~/Desktop/plant-base/client && npm run sharma\""
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": "index.js",
+  "devDependencies": {
+    "eslint": "^6.1.0",
+    "eslint-config-prettier": "^6.0.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "prettier": "^1.18.2"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "proxy": "http://localhost:3001",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oosharma/plantsDataBase.git"
+  },
+  "bugs": {
+    "url": "https://github.com/oosharma/plantsDataBase/issues"
+  },
+  "homepage": "https://github.com/oosharma/plantsDataBase#readme"
+}
