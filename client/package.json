@@ -28,7 +28,8 @@
   },
   "scripts": {
     "dev": "react-scripts start",
-    "start": "react-scripts start",
+    "speci": "serve -s build",
+    "start": "npm run sharma && npm run speci",
     "sharma": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
