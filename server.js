@@ -4,8 +4,10 @@ var cors = require("cors");
 const bodyParser = require("body-parser");
 const logger = require("morgan");
 const Data = require("./data");
+require("dotenv").config();
 
-const API_PORT = 3001;
+const API_PORT = process.env.PORT || 3001;
+
 const app = express();
 app.use(cors());
 const router = express.Router();
@@ -15,7 +17,7 @@ const dbRoute =
   "  mongodb+srv://sharma1:r4vkrGErFFClbk99@plantbase-ogvmk.mongodb.net/test?retryWrites=true&w=majority";
 // "mongodb+srv://sharma1:PlantBase%238@cluster0-ogvmk.mongodb.net/test?retryWrites=true&w=majority";
 // connects our back end code with the database
-mongoose.connect(dbRoute, { useNewUrlParser: true });
+mongoose.connect(MONGODB_URI || (dbRoute, { useNewUrlParser: true }));
 
 let db = mongoose.connection;
 
@@ -91,6 +93,18 @@ router.post("/putData", (req, res) => {
 
 // append /api for our http requests
 app.use("/api", router);
+
+// ... other imports
+const path = require("path");
+
+// ... other app.use middleware
+app.use(express.static(path.join(__dirname, "client", "build")));
+
+// ...
+// Right before your app.listen(), add this:
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+});
 
 // launch our backend into a port
 app.listen(API_PORT, () => console.log(`LISTENING ON PORT ${API_PORT}`));
