@@ -29,9 +29,9 @@
   "scripts": {
     "dev": "react-scripts start",
     "speci": "serve -s build",
-    "start": "npm run sharma && npm run speci",
+    "start": "react-scripts start serve -s build",
     "sharma": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts start serve -s build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "heroku-postbuild": "npm run build",
