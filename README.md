@@ -1,14 +1,12 @@
-# plantsDataBase
+Read Me:
 
-# Clone the repository on your desktop
+Open terminal and run the following commands
 
-# Open terminal
+# cd ~/Desktop
 
-run the following commands 
+# git clone https://github.com/oosharma/plantsDataBase.git
 
-# cd ~/Desktop/plantsDataBase
-
-# cd client
+# cd plantsDataBase/client
 
 # npm install
 
