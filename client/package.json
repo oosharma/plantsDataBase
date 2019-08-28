@@ -35,7 +35,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "heroku-postbuild": "npm run build",
-    "full-stack": "concurrently \"cd .. && node server.js\" \"cd ~/Desktop/plant-base/client && npm run sharma\""
+    "full-stack": "concurrently \"cd .. && node server.js\" \"cd ~/Desktop/plantsDatabase/client && npm run sharma\""
   },
   "eslintConfig": {
     "extends": "react-app"
