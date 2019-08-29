@@ -27,13 +27,13 @@
     "serve": "^11.1.0"
   },
   "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
     "dev": "react-scripts start",
     "speci": "serve -s build",
-    "start": "react-scripts start",
     "sharma": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
     "heroku-postbuild": "npm run build",
     "full-stack": "concurrently \"cd .. && node server.js\" \"cd ~/Desktop/plantsDatabase/client && npm run sharma\""
   },
@@ -63,7 +63,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "proxy": "http://localhost:3001",
+  "proxy": "http://localhost:8000",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/oosharma/plantsDataBase.git"
