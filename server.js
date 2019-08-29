@@ -9,6 +9,7 @@ const API_PORT = process.env.PORT || 3001;
 const app = express();
 app.use(cors());
 const router = express.Router();
+require("dotenv").config();
 
 // this is our MongoDB database
 const dbRoute =
@@ -93,7 +94,7 @@ router.post("/putData", (req, res) => {
 app.use("/api", router);
 
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
+  app.use(path.join(__dirname, "client", "build"));
 
   app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "client", "build", "index.html"));
