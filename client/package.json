@@ -35,7 +35,7 @@
     "speci": "serve -s build",
     "sharma": "react-scripts start",
     "heroku-postbuild": "npm run build",
-    "full-stack": "concurrently \"cd .. && node server.js\" \"cd ~/Desktop/plantsDatabase/client && npm run sharma\"",
+    "full-stack": "concurrently \"cd .. && node server.js\" \"cd client && npm run sharma\"",
     "ls": "pwd && ls"
   },
   "eslintConfig": {
