@@ -89,19 +89,27 @@ router.post("/putData", (req, res) => {
   });
 });
 
-// The "catchall" handler: for any request that doesn't
-// match one above, send back React's index.html file.
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname + "/client/build/index.html"));
-});
-
 // append /api for our http requests
 app.use("/api", router);
+
+// var prdEnv = process.env.NODE_ENV === 'production'
+// if (prdEnv) {
+//     Router.get('/*', async (ctx, next) => {
+//         //judge if it request a normal file,if not ,return the index.html
+//         if (parseMime(ctx.url) === 'unknown') {
+//             ctx.type = 'text/html'
+//             ctx.response.body = fs.readFileSync(path.join(__dirname, 'client/build/index.html'), 'binary')
+//         } else {
+//             ctx.type = parseMime(ctx.url)
+//             ctx.response.body = fs.readFileSync(path.join(__dirname, 'client/build/', ctx.url))
+//         }
+//     })
+// }
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 
-  app.get("*", (req, res) => {
+  app.get("/*", (req, res) => {
     res.sendFile(path.join(__dirname, "client", "build", "index.html"));
   });
 }
