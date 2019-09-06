@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/oosharma/plantsDataBase/static/css/main.7f155f2e.chunk.css",
+    "main.js": "/oosharma/plantsDataBase/static/js/main.00aec9dd.chunk.js",
+    "main.js.map": "/oosharma/plantsDataBase/static/js/main.00aec9dd.chunk.js.map",
+    "runtime~main.js": "/oosharma/plantsDataBase/static/js/runtime~main.928ba67e.js",
+    "runtime~main.js.map": "/oosharma/plantsDataBase/static/js/runtime~main.928ba67e.js.map",
+    "static/js/2.c30c21df.chunk.js": "/oosharma/plantsDataBase/static/js/2.c30c21df.chunk.js",
+    "static/js/2.c30c21df.chunk.js.map": "/oosharma/plantsDataBase/static/js/2.c30c21df.chunk.js.map",
+    "index.html": "/oosharma/plantsDataBase/index.html",
+    "precache-manifest.1245a0dc41919efd1c93d5d76307845c.js": "/oosharma/plantsDataBase/precache-manifest.1245a0dc41919efd1c93d5d76307845c.js",
+    "service-worker.js": "/oosharma/plantsDataBase/service-worker.js",
+    "static/css/main.7f155f2e.chunk.css.map": "/oosharma/plantsDataBase/static/css/main.7f155f2e.chunk.css.map"
+  }
+}
