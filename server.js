@@ -9,20 +9,26 @@ const API_PORT = process.env.PORT || 3001;
 const app = express();
 app.use(cors());
 const router = express.Router();
+// DB Config
+const db = require("./config/keys").mongoURI;
 
+// Connect to MOngo
 // this is our MongoDB database
 const dbRoute =
   "  mongodb+srv://sharma1:r4vkrGErFFClbk99@plantbase-ogvmk.mongodb.net/test?retryWrites=true&w=majority";
 // "mongodb+srv://sharma1:PlantBase%238@cluster0-ogvmk.mongodb.net/test?retryWrites=true&w=majority";
 // connects our back end code with the database
-mongoose.connect(process.env.MONGODB_URI || dbRoute, { useNewUrlParser: true });
+mongoose
+  .connect(db)
+  .then(() => console.log("MongoDB Connected..."))
+  .catch(err => console.log(err));
 
-let db = mongoose.connection;
+// let db = mongoose.connection;
 
-db.once("open", () => console.log("connected to the database"));
+// db.once("open", () => console.log("connected to the database"));
 
-// checks if connection with the database is successful
-db.on("error", console.error.bind(console, "MongoDB connection error:"));
+// // checks if connection with the database is successful
+// db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 // (optional) only made for logging and
 // bodyParser, parses the request body to be a readable json format
